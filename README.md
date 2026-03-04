@@ -15,7 +15,7 @@ Le script :
 1. Charge une liste de trackers depuis `trackers.txt`
 2. Se connecte à l'API Web de qBittorrent
 3. Parcourt tous les torrents
-4. Ne traite **que** les torrents qui possèdent déjà un tracker contenant `p2p-world.net` ou `maxp2p.org`
+4. Ne traite **que** les torrents qui possèdent déjà un tracker d'un des domaines ciblés
 5. Ajoute uniquement les trackers manquants (pas de doublons)
 6. Affiche un résumé final
 
@@ -88,7 +88,18 @@ Sortie attendue :
 Le filtrage des torrents est actuellement basé sur les domaines :
 
 - `p2p-world.net`
+- `p2p-protocol.org`
+- `p2pconnect.net`
+- `drago-server.org`
+- `drago-tracker.cc`
+- `joinpeers.org`
 - `maxp2p.org`
+- `p2p-tracker.net`
+- `p2ptracker.cc`
+- `yggtracking.org`
+- `supertracker.org`
+- `yggshare.org`
+- `loadpeers.org`
 
 Ces domaines sont définis en dur dans `main.py` via `TARGET_DOMAINS`.
 
@@ -98,4 +109,4 @@ Si vous voulez cibler d'autres domaines/anciens trackers, modifiez cette liste.
 
 - **Erreur de connexion qBittorrent** : vérifier `QB_HOST`, `QB_USERNAME`, `QB_PASSWORD` et l'activation WebUI.
 - **Fichier trackers introuvable** : vérifier `TRACKERS_FILE` et l'emplacement de `trackers.txt`.
-- **Aucun tracker ajouté** : possible si les torrents ne contiennent ni `p2p-world.net` ni `maxp2p.org`, ou s'ils sont déjà à jour.
+- **Aucun tracker ajouté** : possible si les torrents ne contiennent aucun des domaines ciblés, ou s'ils sont déjà à jour.

@@ -9,7 +9,21 @@ QB_HOST           = os.getenv("QB_HOST", "http://localhost:8080")
 QB_USERNAME       = os.getenv("QB_USERNAME", "admin")
 QB_PASSWORD       = os.getenv("QB_PASSWORD", "adminadmin")
 TRACKERS_FILE     = os.getenv("TRACKERS_FILE", "trackers.txt")
-TARGET_DOMAINS    = ["p2p-world.net", "maxp2p.org"]
+TARGET_DOMAINS    = [
+    "p2p-world.net",
+    "p2p-protocol.org",
+    "p2pconnect.net",
+    "drago-server.org",
+    "drago-tracker.cc",
+    "joinpeers.org",
+    "maxp2p.org",
+    "p2p-tracker.net",
+    "p2ptracker.cc",
+    "yggtracking.org",
+    "supertracker.org",
+    "yggshare.org",
+    "loadpeers.org",
+]
 
 
 def load_trackers(filepath: str) -> list[str]:
