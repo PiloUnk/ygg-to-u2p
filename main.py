@@ -9,7 +9,7 @@ QB_HOST           = os.getenv("QB_HOST", "http://localhost:8080")
 QB_USERNAME       = os.getenv("QB_USERNAME", "admin")
 QB_PASSWORD       = os.getenv("QB_PASSWORD", "adminadmin")
 TRACKERS_FILE     = os.getenv("TRACKERS_FILE", "trackers.txt")
-TARGET_DOMAIN     = "p2p-world.net"
+TARGET_DOMAINS    = ["p2p-world.net", "maxp2p.org"]
 
 
 def load_trackers(filepath: str) -> list[str]:
@@ -63,9 +63,9 @@ def main():
             if t.url and not t.url.startswith("**")
         ]
 
-        # Est-ce que ce torrent a un tracker p2p-world.net ?
-        if not any(TARGET_DOMAIN in url for url in tracker_urls):
-            print(f"[IGNORÉ]  {torrent.name} — pas de tracker {TARGET_DOMAIN}")
+        # Est-ce que ce torrent a un tracker ciblé ?
+        if not any(any(domain in url for domain in TARGET_DOMAINS) for url in tracker_urls):
+            print(f"[IGNORÉ]  {torrent.name} — pas de tracker ciblé")
             no_target += 1
             continue
 
@@ -87,7 +87,7 @@ def main():
     print(f"\n--- Résumé ---")
     print(f"  Mis à jour          : {updated}")
     print(f"  Déjà à jour         : {skipped}")
-    print(f"  Sans p2p-world.net  : {no_target}")
+    print(f"  Sans tracker ciblé  : {no_target}")
 
 
 if __name__ == "__main__":
