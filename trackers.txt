@@ -1,3 +1,4 @@
+https://tracker.yggleak.top/announce
 udp://open.stealth.si:80/announce
 udp://tracker-udp.gbitt.info:80/announce
 http://tracker.mywaifu.best:6969/announce
