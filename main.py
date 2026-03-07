@@ -87,13 +87,23 @@ def main():
         current_set = set(tracker_urls)
         missing = [t for t in new_trackers if t not in current_set]
 
-        if not missing:
+        if missing:
+            torrent.add_trackers(urls=missing)
+            print(f"[MODIFIÉ] {torrent.name} — {len(missing)} tracker(s) ajouté(s)")
+
+        # Supprime les trackers ciblés
+        to_remove = [url for url in tracker_urls if any(domain in url for domain in TARGET_DOMAINS)]
+        for url in to_remove:
+            torrent.remove_trackers(urls=[url])
+
+        if not missing and not to_remove:
             print(f"[OK]      {torrent.name} — déjà à jour")
             skipped += 1
             continue
 
-        torrent.add_trackers(urls=missing)
-        print(f"[MODIFIÉ] {torrent.name} — {len(missing)} tracker(s) ajouté(s)")
+        if to_remove:
+            print(f"[NETTOYÉ] {torrent.name} — {len(to_remove)} tracker(s) ciblé(s) supprimé(s)")
+
         updated += 1
 
     client.auth_log_out()
